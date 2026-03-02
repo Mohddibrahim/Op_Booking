@@ -30,14 +30,14 @@
                 {% endif %}
 
                 <div class="mt-3">
-                    <a href="{% url 'facility_detail' facility.id %}" class="btn btn-primary btn-sm">View</a>
+                    <a href="{% url 'facility_detail' facility.id %}" class="btn btn-primary btn-sm">Views</a>
 
                     {% if facility.status != "APPROVED" %}
-                    <a href="{% url 'approve_facility' facility.id %}" class="btn btn-success btn-sm">Approve</a>
+                    <a href="{% url 'approve_facility' facility.id %}" class="btn btn-success btn-sm">Approved</a>
                     {% endif %}
 
                     {% if facility.status != "REJECTED" %}
-                    <a href="{% url 'reject_facility' facility.id %}" class="btn btn-danger btn-sm">Reject</a>
+                    <a href="{% url 'reject_facility' facility.id %}" class="btn btn-danger btn-sm">Rejected</a>
                     {% endif %}
                 </div>
             </div>
