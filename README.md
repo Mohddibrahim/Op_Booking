@@ -70,7 +70,7 @@ Booking/
 └── manage.py
  Installation Guide
 1. Clone Repository
-git clone https://github.com/your-username/booking-system.git
+git clone https://github.com/Mohddibrahim/Op_Booking.git
 cd booking-system
 2.Create Virtual Environment
 python -m venv venv
