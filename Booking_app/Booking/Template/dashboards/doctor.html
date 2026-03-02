@@ -1,0 +1,185 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row">
+
+        <!-- SIDEBAR -->
+        <div class="col-md-2 bg-dark text-white vh-100 p-4">
+            <h4 class="text-center fw-bold">Doctor Panel</h4>
+            <hr>
+            <a href="#" class="text-white d-block mb-3">
+                <i class="bi bi-speedometer2 me-2"></i> Dashboard
+            </a>
+            <a href="{% url 'update_doctor_profile' %}" class="text-white d-block mb-3">
+                <i class="bi bi-person-lines-fill me-2"></i> Update Profile
+            </a>
+            <a href="{% url 'create_slot' %}" class="text-white d-block mb-3">
+                <i class="bi bi-calendar-plus me-2"></i> Create Slot
+            </a>
+        </div>
+
+        <!-- MAIN CONTENT -->
+        <div class="col-md-10 p-4 bg-light">
+
+            <h3 class="mb-4 fw-bold">Welcome Dr. {{ doctor.name }}</h3>
+
+            <!-- STATS CARDS -->
+            <div class="row g-4 mb-4">
+
+                <div class="col-md-3">
+                    <div class="card shadow border-0 p-3 stat-card">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <p class="text-muted mb-1">Total Appointments</p>
+                                <h3>{{ total_appointments }}</h3>
+                            </div>
+                            <i class="bi bi-calendar-check text-primary fs-1"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="card shadow border-0 p-3 stat-card">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <p class="text-muted mb-1">Today</p>
+                                <h3>{{ today_appointments }}</h3>
+                            </div>
+                            <i class="bi bi-clock-history text-warning fs-1"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="card shadow border-0 p-3 stat-card">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <p class="text-muted mb-1">Cancelled</p>
+                                <h3>{{ cancelled_appointments }}</h3>
+                            </div>
+                            <i class="bi bi-x-circle text-danger fs-1"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="card shadow border-0 p-3 stat-card bg-success text-white">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <p class="mb-1">Total Earnings</p>
+                                <h3>₹ {{ total_earnings }}</h3>
+                            </div>
+                            <i class="bi bi-currency-rupee fs-1"></i>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- PROFILE COMPLETION -->
+            <div class="card shadow border-0 p-4 mb-4">
+                <h5 class="fw-bold mb-3">Profile Completion</h5>
+                <div class="progress" style="height: 20px;">
+                    <div class="progress-bar bg-success"
+                         style="width: {{ profile_completion }}%;">
+                        {{ profile_completion }}%
+                    </div>
+                </div>
+            </div>
+
+            <!-- UPCOMING -->
+            <div class="card shadow border-0 p-4 mb-4">
+                <h4 class="fw-bold mb-3">Upcoming Appointments</h4>
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Patient</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Status</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for a in upcoming %}
+                            <tr>
+                                <td>{{ a.patient_name }}</td>
+                                <td>{{ a.slot.date }}</td>
+                                <td>{{ a.slot.start_time }}</td>
+                                <td>
+                                    <span class="badge bg-success">Confirmed</span>
+                                </td>
+                                <td>
+                                    <a href="{% url 'mark_completed' a.id %}"
+                                       class="btn btn-sm btn-outline-primary">
+                                       Complete
+                                    </a>
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="5" class="text-center text-muted">
+                                    No upcoming appointments
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- PAST -->
+            <div class="card shadow border-0 p-4">
+                <h4 class="fw-bold mb-3">Past Appointments</h4>
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Patient</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for a in past %}
+                            <tr>
+                                <td>{{ a.patient_name }}</td>
+                                <td>{{ a.slot.date }}</td>
+                                <td>
+                                    {% if a.status == "compeleted" %}
+                                        <span class="badge bg-info">Completed</span>
+                                    {% elif a.status == "cancelled" %}
+                                        <span class="badge bg-danger">Cancelled</span>
+                                    {% else %}
+                                        <span class="badge bg-secondary">Confirmed</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="3" class="text-center text-muted">
+                                    No past appointments
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<style>
+.stat-card {
+    transition: 0.3s ease;
+}
+
+</style>
+
+
+{% endblock %}

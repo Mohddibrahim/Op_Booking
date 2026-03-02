@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container mt-4">
+    <div class="card shadow p-4">
+
+        <h3>{{ doctor.user.username }}</h3>
+        <p><strong>Email:</strong> {{ doctor.user.email }}</p>
+        <p><strong>Status:</strong> {{ doctor.status }}</p>
+        <p><strong>Blocked:</strong> {{ doctor.is_blocked }}</p>
+        <p><strong>Facility:</strong> {{ doctor.facility.name }}</p>
+
+    </div>
+</div>
+
+{% endblock %}

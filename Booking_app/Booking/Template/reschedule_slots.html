@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<h3>Reschedule Appointment with {{ appointment.doctor.name }}</h3>
+
+{% if available_slots %}
+    <ul>
+        {% for slot in available_slots %}
+        <li>
+            {{ slot.date }} - {{ slot.start_time }}
+            <a href="{% url 'reschedule_appointment' appointment.id slot.id %}" class="btn btn-warning btn-sm">
+                Select this slot
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No available slots for this doctor.</p>
+{% endif %}
+
+<a href="{% url 'my_appointments' %}" class="btn btn-secondary">Back</a>
+{% endblock %}

@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- HERO CAROUSEL -->
+<div id="carouselExampleDark" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+
+    <div class="carousel-item active">
+      <img src="{% static 'images/car1.jpg' %}" class="d-block w-100" style="height:500px;object-fit:cover;">
+      <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-3">
+        <h1 class="fw-bold text-white">BookMyOP</h1>
+        <p class="text-white">Book Doctor Appointments Easily & Instantly</p>
+        <a href="#" class="btn btn-primary">Book Now</a>
+      </div>
+    </div>
+
+    <div class="carousel-item">
+      <img src="{% static 'images/car2.jpg' %}" class="d-block w-100" style="height:500px;object-fit:cover;">
+      <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-3">
+        <h2 class="text-white">Skip Waiting Lines</h2>
+        <p class="text-white">Find Doctors Near You</p>
+      </div>
+    </div>
+
+    <div class="carousel-item">
+      <img src="{% static 'images/car3.jpg' %}" class="d-block w-100" style="height:500px;object-fit:cover;">
+      <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-3">
+        <h2 class="text-white">Smart Healthcare Booking</h2>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ABOUT SECTION -->
+<section class="container py-5">
+  <div class="row align-items-center">
+    <div class="col-md-6">
+      <img src="{% static 'images/about.jpg' %}" class="img-fluid rounded shadow">
+    </div>
+    <div class="col-md-6">
+      <h2 class="fw-bold">About BookMyOP</h2>
+      <p>
+        BookMyOP is a smart hospital appointment booking system that allows patients 
+        to book appointments with doctors online. No more long waiting queues.
+      </p>
+      <p>
+        Our mission is to simplify healthcare access with a seamless digital experience.
+      </p>
+      <a href="#" class="btn btn-outline-primary">Learn More</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- FUTURE FEATURES -->
+<section class="bg-light py-5">
+  <div class="container">
+    <h2 class="text-center fw-bold mb-4">Upcoming Features</h2>
+    <div class="row g-4">
+
+      <div class="col-md-4">
+        <div class="card shadow h-100 border-0">
+          <div class="card-body text-center">
+            <h4 class="card-title">Video Consultation</h4>
+            <p class="card-text">
+              Consult doctors through secure video calls from your home.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card shadow h-100 border-0">
+          <div class="card-body text-center">
+            <h4 class="card-title">Online Payments</h4>
+            <p class="card-text">
+              Pay consultation fees securely using online payment gateways.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card shadow h-100 border-0">
+          <div class="card-body text-center">
+            <h4 class="card-title">Medical Records</h4>
+            <p class="card-text">
+              Store and access your digital medical records anytime.
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- CONTACT SECTION -->
+<section class="container py-5">
+  <h2 class="text-center fw-bold mb-4">Contact Us</h2>
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <form>
+        <div class="mb-3">
+          <input type="text" class="form-control" placeholder="Your Name">
+        </div>
+        <div class="mb-3">
+          <input type="email" class="form-control" placeholder="Your Email">
+        </div>
+        <div class="mb-3">
+          <textarea class="form-control" rows="4" placeholder="Your Message"></textarea>
+        </div>
+        <button class="btn btn-primary w-100">Send Message</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+
+<!-- FOOTER -->
+<footer class="bg-dark text-white text-center py-3">
+  <p class="mb-0">© 2026 BookMyOP | Smart Healthcare Booking System  <h5>Emergency Contact: 0123456789</h5></p>
+</footer>
+
+{% endblock %}

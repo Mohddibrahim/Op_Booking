@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-4">
+    <h3 class="mb-4 text-center">Available Time Slots</h3>
+
+    {% if slots %}
+        <div class="row">
+            {% for slot in slots %}
+            <div class="col-md-4 mb-3">
+                <div class="card shadow-sm">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">{{ slot.doctor.name }}</h5>
+                        <p><strong>Date:</strong> {{ slot.date }}</p>
+                        <p><strong>Time:</strong> {{ slot.start_time }}</p>
+
+                        {% if user.is_authenticated %}
+                        <a href="{% url 'confirm_slot' slot.id %}" class="btn btn-success w-100">
+                            Confirm Slot
+                        </a>
+                        {% else %}
+                        <a href="{% url 'login' %}" class="btn btn-warning w-100">
+                            Login to Book
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-warning text-center">
+            No available slots at the moment.
+        </div>
+    {% endif %}
+</div>
+
+{% endblock %}

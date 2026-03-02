@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container mt-4">
+    <div class="card shadow-lg p-4">
+
+        <h3>{{ facility.name }}</h3>
+
+        {% if facility.image %}
+        <img src="{{ facility.image.url }}" width="300" class="mb-3">
+        {% endif %}
+
+        <p><strong>Type:</strong> {{ facility.get_facility_type_display }}</p>
+        <p><strong>City:</strong> {{ facility.city }}</p>
+        <p><strong>Area:</strong> {{ facility.area }}</p>
+        <p><strong>Address:</strong> {{ facility.address }}</p>
+        <p><strong>Admin:</strong> {{ facility.admin.username }}</p>
+        <p><strong>Status:</strong> {{ facility.status }}</p>
+
+    </div>
+</div>
+
+{% endblock %}

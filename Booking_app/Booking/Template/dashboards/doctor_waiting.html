@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container mt-5 text-center">
+    <div class="card shadow p-5">
+
+        {% if doctor.status == "PENDING" %}
+            <h3 class="text-warning">Your account is under review</h3>
+            <p>Please wait for facility approval.</p>
+
+        {% elif doctor.status == "REJECTED" %}
+            <h3 class="text-danger">Your application was rejected</h3>
+            <p>Please contact your facility admin.</p>
+
+        {% elif doctor.is_blocked %}
+            <h3 class="text-danger">Your account is blocked</h3>
+            <p>Contact facility admin for details.</p>
+        {% endif %}
+
+    </div>
+</div>
+
+{% endblock %}

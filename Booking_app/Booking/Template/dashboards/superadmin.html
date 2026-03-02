@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container mt-4">
+
+<h2 class="text-center mb-4">Super Admin Control Panel</h2>
+
+<!-- FACILITIES SECTION -->
+<h4>Medical Facilities</h4>
+
+<div class="row">
+    {% for facility in facilities %}
+    <div class="col-md-4 mb-4">
+        <div class="card shadow-lg h-100">
+
+            {% if facility.image %}
+            <img src="{{ facility.image.url }}" class="card-img-top" height="200">
+            {% endif %}
+
+            <div class="card-body">
+                <h5>{{ facility.name }}</h5>
+                <p>{{ facility.city }} | {{ facility.get_facility_type_display }}</p>
+
+                {% if facility.status == "PENDING" %}
+                    <span class="badge bg-warning">Pending</span>
+                {% elif facility.status == "APPROVED" %}
+                    <span class="badge bg-success">Approved</span>
+                {% else %}
+                    <span class="badge bg-danger">Rejected</span>
+                {% endif %}
+
+                <div class="mt-3">
+                    <a href="{% url 'facility_detail' facility.id %}" class="btn btn-primary btn-sm">View</a>
+
+                    {% if facility.status != "APPROVED" %}
+                    <a href="{% url 'approve_facility' facility.id %}" class="btn btn-success btn-sm">Approve</a>
+                    {% endif %}
+
+                    {% if facility.status != "REJECTED" %}
+                    <a href="{% url 'reject_facility' facility.id %}" class="btn btn-danger btn-sm">Reject</a>
+                    {% endif %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<hr>
+
+<!-- FACILITY ADMINS SECTION -->
+<h4>Facility Admins</h4>
+
+<table class="table table-bordered shadow">
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Status</th>
+        <th>Action</th>
+    </tr>
+
+    {% for admin in facility_admins %}
+    <tr>
+        <td>{{ admin.username }}</td>
+        <td>{{ admin.email }}</td>
+
+        <td>
+            {% if admin.is_blocked %}
+                <span class="badge bg-danger">Blocked</span>
+            {% else %}
+                <span class="badge bg-success">Active</span>
+            {% endif %}
+        </td>
+
+        <td>
+            {% if admin.is_blocked %}
+                <a href="{% url 'unblock_facility_admin' admin.id %}" class="btn btn-success btn-sm">Unblock</a>
+            {% else %}
+                <a href="{% url 'block_facility_admin' admin.id %}" class="btn btn-danger btn-sm">Block</a>
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+</div>
+
+{% endblock %}

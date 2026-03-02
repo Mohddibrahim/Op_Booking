@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-lg-6">
+
+            <div class="card shadow-lg border-0">
+
+                <!-- Header -->
+                <div class="card-header bg-success text-white text-center py-3">
+                    <h4 class="mb-0">🗓 Confirm Your Appointment</h4>
+                </div>
+
+                <div class="card-body p-4">
+
+                    <!-- Booking Summary -->
+                    <div class="mb-4">
+
+                        <div class="d-flex justify-content-between mb-2">
+                            <strong>Doctor:</strong>
+                            <span>{{ slot.doctor.name }}</span>
+                        </div>
+
+                        <div class="d-flex justify-content-between mb-2">
+                            <strong>Date:</strong>
+                            <span>{{ slot.date }}</span>
+                        </div>
+
+                        <div class="d-flex justify-content-between mb-3">
+                            <strong>Time:</strong>
+                            <span>{{ slot.start_time }}</span>
+                        </div>
+
+                        <hr>
+
+                    </div>
+
+                    <!-- Booking Form -->
+                    <form method="post" action="{% url 'book_appointment' slot.id %}">
+                        {% csrf_token %}
+
+                        <div class="mb-4">
+                            <label for="patient_name" class="form-label fw-semibold">
+                                Patient Name
+                            </label>
+                            <input type="text"
+                                   id="patient_name"
+                                   name="patient_name"
+                                   class="form-control"
+                                   placeholder="Enter patient full name"
+                                   required>
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit"
+                                    class="btn btn-success btn-lg">
+                                Confirm & Proceed to Payment
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- Back Button -->
+                    <div class="text-center mt-3">
+                        <a href="{% url 'doctor_slots' slot.doctor.id %}"
+                           class="btn btn-outline-secondary">
+                            ← Back to Slots
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

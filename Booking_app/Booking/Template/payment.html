@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-lg-6">
+
+            <div class="card shadow-lg border-0">
+
+                <div class="card-header bg-primary text-white text-center py-3">
+                    <h4 class="mb-0">💳 Payment Summary</h4>
+                </div>
+
+                <div class="card-body p-4">
+
+                    <div class="mb-3">
+                        <strong>Doctor:</strong>
+                        <span class="float-end">{{ booking.doctor.name }}</span>
+                    </div>
+
+                    <div class="mb-3">
+                        <strong>Date:</strong>
+                        <span class="float-end">{{ booking.slot.date }}</span>
+                    </div>
+
+                    <div class="mb-3">
+                        <strong>Time:</strong>
+                        <span class="float-end">{{ booking.slot.start_time }}</span>
+                    </div>
+
+                    <div class="mb-4">
+                        <strong>Patient:</strong>
+                        <span class="float-end">{{ booking.patient_name }}</span>
+                    </div>
+
+                    <hr>
+
+                    <div class="d-grid">
+                        <a href="{% url 'payment_success' booking.id %}" 
+                           class="btn btn-success btn-lg">
+                            Proceed to Pay
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container py-5">
+
+    <h3 class="mb-4 text-center fw-bold"> My Booking History</h3>
+
+    {% if appointments %}
+
+    <div class="table-responsive">
+        <table class="table table-hover align-middle shadow-sm bg-white rounded">
+            <thead class="table-light">
+                <tr>
+                    <th>Doctor</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Status</th>
+                    <th class="text-center">Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for appointment in appointments %}
+                <tr>
+
+                    <td class="fw-semibold">
+                        {{ appointment.doctor.name }}
+                    </td>
+
+                    <td>
+                        {{ appointment.slot.date }}
+                    </td>
+
+                    <td>
+                        {{ appointment.slot.start_time }}
+                    </td>
+
+                    <td>
+                        {% if appointment.status == "confirmed" %}
+                            <span class="badge bg-success px-3 py-2">
+                                Confirmed
+                            </span>
+                        {% elif appointment.status == "cancelled" %}
+                            <span class="badge bg-danger px-3 py-2">
+                                Cancelled
+                            </span>
+                        {% else %}
+                            <span class="badge bg-secondary px-3 py-2">
+                                {{ appointment.status }}
+                            </span>
+                        {% endif %}
+                    </td>
+
+                    <td class="text-center">
+
+                        {% if appointment.status == "confirmed" %}
+                            <a href="{% url 'cancel_user_appointment' appointment.id %}"
+                               class="btn btn-outline-danger btn-sm me-2">
+                                Cancel
+                            </a>
+
+                            <a href="{% url 'show_reschedule_slots' appointment.id %}"
+                               class="btn btn-outline-warning btn-sm">
+                                Reschedule
+                            </a>
+                        {% else %}
+                            <span class="text-muted small">No actions</span>
+                        {% endif %}
+
+                    </td>
+
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    {% else %}
+
+    <div class="alert alert-info text-center shadow-sm">
+        No appointments yet.
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}
